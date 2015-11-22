@@ -1,4 +1,4 @@
-function [x z imWidth imHeight nPersons imNumTraining imNumTesting] = loadImages
+function [imageSet] = loadImages
     % Launches a window to select the top level directory
     topLevelDir = uigetdir;
     % Loads all the png images
@@ -23,6 +23,16 @@ function [x z imWidth imHeight nPersons imNumTraining imNumTesting] = loadImages
             imageSet(:,imageNum*(i-1)+j+1) = imageVector;
         end
     end
+    
+    % For getting a particular object
+    objectID = 4;
+    objectSet = zeros(128*128, 72);
+    for i = 1:72
+       objectSet(:,i) = imageSet(:,72*(objectID-1)+i); 
+    end
+    
+%     imshow(uint8(reshape(objectSet(:,1),128,128)));
+%     imshow(uint8(reshape(objectSet(:,72),128,128)));
     
 %     N_x = nPersons*imNumTraining;
 %     N_z = nPersons*imNumTesting;
